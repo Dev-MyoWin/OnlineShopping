@@ -7,7 +7,7 @@
 //npm install ejs
 
 const express = require('express');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); // to slove the output "undefined"
 const path = require('path');
 const app = express();
 
@@ -21,7 +21,6 @@ const shopRoute = require('./routes/shop');
 
 // must be top of the use
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoute);
 app.use('/', shopRoute);
