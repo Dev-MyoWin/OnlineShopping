@@ -1,7 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
+const getProductsFromFile = cb => {
+    const p = path.join(path.dirname(process.mainModule.filename), 'data', 'product.json');
+    fs.readFile(p, (err, fileContent) => {
+        if (err) {
+            cb([]);
+        }
+        cb(JSON.parse(fileContent));
+    })
 
+}
 module.exports = class Product {
     constructor(title, imageUrl, price, description) {
         this.title = title;
@@ -10,6 +19,7 @@ module.exports = class Product {
         this.description = description;
     };
     save() {
+        this.id = Math.random().toString();
         const p = path.join(path.dirname(process.mainModule.filename), 'data', 'product.json');
         fs.readFile(p, (err, fileContent) => {
             let products = [];
@@ -27,13 +37,14 @@ module.exports = class Product {
         });
     }
     static fetchAll(cb) {
-        const p = path.join(path.dirname(process.mainModule.filename), 'data', 'product.json');
-        fs.readFile(p, (err, fileContent) => {
-            if (err) {
-                cb([]);
-            }
-            cb(JSON.parse(fileContent));
-        })
+        getProductsFromFile(cb);
 
+    }
+    //not same cb 
+    static findById(id, cb) {
+        getProductsFromFile(products => {
+            const product = products.find(p => p.id === id);
+            cb(product);
+        });
     }
 };

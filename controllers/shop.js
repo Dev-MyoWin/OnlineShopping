@@ -19,6 +19,17 @@ exports.getProducts = (req, res, next) => {
     });
 };
 
+exports.getProduct = (req, res, next) => {
+    const prodId = req.params.productId;// to call prameter use "params"
+    Product.findById(prodId, cb => {
+        res.render('shop/product-detail.ejs', {
+            pageTitle: "Product Detail",
+            path: "/products",
+            product: cb
+        });
+    });
+};
+
 exports.getCarts = (req, res, next) => {
     res.render('shop/cart.ejs', {
         pageTitle: 'Cart',
