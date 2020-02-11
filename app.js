@@ -6,6 +6,7 @@
 // need to install ->> npm install body-parser
 //npm install ejs
 //npm install express-ejs-layouts
+//npm install --save mongodb
 
 const express = require('express');
 const bodyParser = require('body-parser'); // to slove the output "undefined"
@@ -20,14 +21,15 @@ app.set('view engine', 'ejs');
 const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
 
-//import from util
-const mongoConnect = require('./util/database');
+//connect mongo db
+const mongoConnect = require('./util/database').mongoConnect;
+
 
 // must be top of the use
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/admin', adminRoute);
-app.use('/', shopRoute);
+// app.use('/', shopRoute);
 
 app.use((req, res, next) => {
     res.render('404',
@@ -36,7 +38,7 @@ app.use((req, res, next) => {
             path: ''
         });
 });
-mongoConnect((client) => {
-    console.log(client);
+
+mongoConnect(() => {
     app.listen(3000);
 })

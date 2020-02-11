@@ -6,5 +6,5 @@ router.get('/add-product', adminController.getAddProduct);
 //add post
 router.post('/add-product', adminController.postAddProduct);
 //product list
-router.get('/products', adminController.getProducts);
+//router.get('/products', adminController.getProducts);
 module.exports = router;

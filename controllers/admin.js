@@ -14,16 +14,23 @@ exports.postAddProduct = (req, res, next) => {
     const description = req.body.description;
     const product = new Product(title, imageUrl, price, description);// since constructor build in product.js
 
-    product.save();
-    res.redirect('/');
+    product.save()
+        .then(result => {
+            console.log(result);
+            res.redirect('/');
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
 };
 
-exports.getProducts = (req, res, next) => {
-    Product.fetchAll((cb) => {
-        res.render('admin/products.ejs', {
-            pageTitle: 'Admin Products',
-            path: '/admin/products',
-            prods: cb,
-        })
-    });
-};
+// exports.getProducts = (req, res, next) => {
+//     Product.fetchAll((cb) => {
+//         res.render('admin/products.ejs', {
+//             pageTitle: 'Admin Products',
+//             path: '/admin/products',
+//             prods: cb,
+//         })
+//     });
+// };
