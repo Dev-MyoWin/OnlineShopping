@@ -29,7 +29,7 @@ const mongoConnect = require('./util/database').mongoConnect;
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/admin', adminRoute);
-// app.use('/', shopRoute);
+app.use('/', shopRoute);
 
 app.use((req, res, next) => {
     res.render('404',

@@ -1,12 +1,26 @@
-<h1>
-    <img src="<%= product.imageUrl %>" alt="">
-</h1>
-<h1>
-    <%= product.title %>
-</h1>
-<h1>
-    <%= product.price %>
-</h1>
-<h1>
-    <%= product.description %>
-</h1>
+<div class="container w-50">
+    <!-- Card -->
+    <div class="card">
+
+        <!-- Card image -->
+        <img class="card-img-top" src="<%= product.imageUrl %>" alt="Card image cap">
+
+        <!-- Card content -->
+        <div class="card-body">
+
+            <!-- Title -->
+            <h4 class="card-title"><a><%= product.title %></a></h4>
+            <h4 class="card-title"><a><%= product.price %> <span style="color:red">$</span></a></h4>
+            <!-- Text -->
+            <p class="card-text"><%= product.description %></p>
+            <!-- Button -->
+            <div class="col-md-12 text-center text-md-left ">
+                <button class="btn btn-primary btn-rounded">
+                    <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Add to cart</button>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Card -->
+</div>

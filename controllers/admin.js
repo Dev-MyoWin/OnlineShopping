@@ -25,12 +25,19 @@ exports.postAddProduct = (req, res, next) => {
 
 };
 
-// exports.getProducts = (req, res, next) => {
-//     Product.fetchAll((cb) => {
-//         res.render('admin/products.ejs', {
-//             pageTitle: 'Admin Products',
-//             path: '/admin/products',
-//             prods: cb,
-//         })
-//     });
-// };
+exports.getProducts = (req, res, next) => {
+    Product.fetchAll()
+        .then(products => {
+            res.render('admin/products.ejs', {
+                pageTitle: 'Admin Products',
+                path: '/admin/products',
+                prods: products
+
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+
+};
