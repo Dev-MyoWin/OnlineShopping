@@ -1,0 +1,62 @@
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="container">
+                    <!-- Material form subscription -->
+                    <div class="card">
+
+                        <h5 class="card-header info-color white-text text-center py-4">
+                            <strong> <% if(editing){ %> Edit Product <% } else { %> Add Product <% } %> </strong>
+                        </h5>
+
+                        <!--Card content-->
+                        <div class="card-body px-lg-5">
+
+                            <!-- Form -->
+                            <form class="text-center" style="color: #757575;"
+                                action="<% if(editing){ %> /admin/edit-product <% } else { %> /admin/add-product <% } %>"
+                                method="POST">
+                                <!-- Name -->
+                                <%if(editing){%>
+                                <input type="hidden" name="productId" value="<%= product._id %>">
+                                <%}%>
+                                <div class="md-form mt-3">
+                                    <input type="text" id="title" name="title" class="form-control"
+                                        value="<% if(editing) { %> <%= product.title %> <% } %>">
+                                <label for="title">Title</label>
+                        </div>
+                        <div class="md-form mt-3">
+                            <input type="text" id="imgeUrl" name="imageUrl" class="form-control"
+                                value="<% if(editing) { %> <%= product.imageUrl %> <% } %>">
+                            <label for="imageUrl">Image Url</label>
+                        </div>
+                        <div class="md-form mt-3">
+                            <input type="text" id="price" name="price" class="form-control"
+                                value="<% if(editing) { %> <%= product.price %> <% } %>">
+                            <label for="price">Price</label>
+                        </div>
+                        <div class="md-form mt-3">
+                            <textarea name="description" id="description" class="form-control" cols="30"
+                                rows="3"><% if(editing) { %> <%= product.description %> <% } %></textarea>
+                            <label for="description">Description</label>
+                        </div>
+                        <!-- Sign in button -->
+                        <button class="btn btn-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
+                            type="submit"><% if(editing){ %> Edit Product <% } else { %> Add Product
+                            <% } %></button>
+
+                        </form>
+                        <!-- Form -->
+
+                    </div>
+
+                </div>
+                <!-- Material form subscription -->
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+    </div>
+</main>
