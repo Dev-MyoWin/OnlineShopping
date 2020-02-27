@@ -1,26 +1,78 @@
-<div class="container w-50">
-    <!-- Card -->
-    <div class="card">
+<div class="container mt-5">
 
-        <!-- Card image -->
-        <img class="card-img-top" src="<%= product.imageUrl %>" alt="Card image cap">
 
-        <!-- Card content -->
-        <div class="card-body">
+    <!--Section: Content-->
+    <section class="mb-5">
 
-            <!-- Title -->
-            <h4 class="card-title"><a><%= product.title %></a></h4>
-            <h4 class="card-title"><a><%= product.price %> <span style="color:red">$</span></a></h4>
-            <!-- Text -->
-            <p class="card-text"><%= product.description %></p>
-            <!-- Button -->
-            <div class="col-md-12 text-center text-md-left ">
-                <button class="btn btn-primary btn-rounded">
-                    <i class="fas fa-cart-plus mr-2" aria-hidden="true"></i> Add to cart</button>
+        <!-- Section heading -->
+        <h3 class="text-center font-weight-bold mb-5">Product Details</h3>
+
+        <div class="row">
+
+            <!--Grid column-->
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <!--News card-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row h-100 d-flex align-items-center">
+                            <div class="col-lg-6">
+                                <ul class="fa-ul mb-5 text-muted font-weight-light">
+                                    <li class="mb-2"><strong><%= product.title %></strong>
+                                    </li>
+                                    <li class="mb-2"><span class="fa-li"><i class="fas fa-check green-text"></i></span>
+                                        <strong><%= product.price %>$</strong>
+                                    </li>
+                                </ul>
+                                <p class="text-muted font-weight-light ml-3 mb-5"><%= product.description %></p>
+
+                                <div class="d-flex justify-content-between ml-3">
+                                    <form action="/cart" method="POST">
+                                        <button type="submit" class="btn btn-black btn-rounded btn-sm px-3">Add to
+                                            Cart</button>
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                    </form>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+
+                                <!--Carousel Wrapper-->
+                                <div id="carousel-thumb" class="carousel slide carousel-thumbnails"
+                                    data-ride="carousel">
+
+                                    <!--Slides-->
+                                    <div class="carousel-item active">
+                                        <img src="<%= product.imageUrl %>" alt="First slide" class="img-fluid">
+                                    </div>
+                                    <!--/.Slides-->
+
+                                    <!--Thumbnails-->
+                                    <a class="carousel-control-prev" href="#carousel-thumb" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-thumb" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                    <!--/.Thumbnails-->
+
+                                </div>
+                                <!--/.Carousel Wrapper-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="col-md-2"></div>
+            <!--Grid column-->
 
         </div>
+    </section>
+    <!--Section: Content-->
 
-    </div>
-    <!-- Card -->
+
 </div>

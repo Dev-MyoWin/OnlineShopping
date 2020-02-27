@@ -1,6 +1,7 @@
 const Product = require('../models/product');
 const mongodb = require('mongodb');
 exports.getAddProduct = (req, res, next) => {
+    console.log(req.user);
     res.render('admin/product-form.ejs',
         {
             pageTitle: 'Add Product',
@@ -14,7 +15,8 @@ exports.postAddProduct = (req, res, next) => {
     const imageUrl = req.body.imageUrl;
     const price = req.body.price;
     const description = req.body.description;
-    const product = new Product(title, imageUrl, price, description, null);// since constructor build in product.js
+    const userId = req.user._id;
+    const product = new Product(title, imageUrl, price, description, userId, null);// since constructor build in product.js
 
     product.save()
         .then(result => {
@@ -76,7 +78,8 @@ exports.postEditProduct = (req, res, next) => {
     const updatedImageUrl = req.body.imageUrl;
     const updatedPrice = req.body.price;
     const updatedDec = req.body.description;
-    const product = new Product(updatedTitle, updatedImageUrl, updatedPrice, updatedDec, new mongodb.ObjectId(prodId));
+    const updatedUserId = req.user._id;
+    const product = new Product(updatedTitle, updatedImageUrl, updatedPrice, updatedDec, updatedUserId, new mongodb.ObjectId(prodId));
     product.save()
         .then(() => {
             console.log("updated successful");
