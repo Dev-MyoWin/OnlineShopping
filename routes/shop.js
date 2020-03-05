@@ -12,7 +12,7 @@ router.get('/cart', shopController.getCarts);
 router.post('/cart', shopController.postCarts);
 
 router.post('/delete-cart-item', shopController.postDeleteCartItem);
-//order
+// //order
 router.post('/orders', shopController.postOrders);
 
 module.exports = router;

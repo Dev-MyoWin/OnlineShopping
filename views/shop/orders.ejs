@@ -1,1 +1,45 @@
-<h1>This is order page</h1>
+<div class="container my-5 py-3 z-depth-1 rounded">
+
+
+    <!--Section: Content-->
+    <section class="dark-grey-text">
+        <h5 class="card-header info-color white-text text-center py-4">
+            <strong>Your Order List</strong>
+        </h5>
+        <!-- Shopping Cart table -->
+        <div class="table-responsive">
+            <% if(orders.length >0){ %>
+
+            <% orders.forEach(order=>{%>
+            <div>
+
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-primary">
+                        # <%= order._id %>
+                        <span class="badge badge-primary badge-pill"></span>
+                    </li>
+                    <% order.products.forEach(product=>{%>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <%= product.product.title %>
+                        <span class="badge badge-primary badge-pill"><%= product.quantity %></span>
+                    </li>
+                    <%})%>
+
+                </ul>
+            </div>
+            <%})%>
+
+            <% } else {%>
+            <center><strong>
+                    <h1 class="dispaly-4 my-5 text-warning ">NOTHING HERE</h1>
+                </strong></center>
+            <%  } %>
+
+        </div>
+        <!-- /.Shopping Cart table -->
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>

@@ -7,7 +7,7 @@
 //npm install ejs
 //npm install express-ejs-layouts
 //npm install --save mongodb
-
+const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser'); // to slove the output "undefined"
 const path = require('path');
@@ -22,18 +22,15 @@ const User = require('./models/user');
 const adminRoute = require('./routes/admin');
 const shopRoute = require('./routes/shop');
 
-//connect mongo db
-const mongoConnect = require('./util/database').mongoConnect;
-
 
 // must be top of the use
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
-    User.findById("5e5377071c9d440000ffdb7f")
+    User.findById("5e5f674027efa904eca13bcd")
         .then((user) => {
 
-            req.user = new User(user.name, user.email, user.cart, user._id);
+            req.user = user;
 
             next();
 
@@ -53,6 +50,27 @@ app.use((req, res, next) => {
         });
 });
 
-mongoConnect(() => {
-    app.listen(3000);
-})
+mongoose.connect('mongodb+srv://admin:admin123@onlineshop-mfcet.mongodb.net/shop', { useNewUrlParser: true })
+    .then(result => {
+        User.findOne()
+            .then(user => {
+                if (!user) {
+                    const user = new User({
+                        name: 'Myo Win',
+                        email: 'myo@gmail.com',
+                        cart: {
+                            items: [
+
+                            ]
+                        }
+                    })
+                    user.save();
+                }
+            })
+
+        console.log("connected Db...");
+        app.listen(3000);
+    })
+    .catch(err => {
+        console.log(err);
+    })
